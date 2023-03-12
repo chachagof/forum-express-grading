@@ -41,17 +41,28 @@ const userController = {
     res.redirect('/signin')
   },
   getUser: (req, res, next) => {
-    return User.findByPk(req.params.id, {
-      include: [{
-        model: Comment,
-        include: Restaurant
-      }]
+    const { id } = req.params
+    return User.findByPk(id, {
+      include: [
+        { model: Comment, include: Restaurant },
+        { model: Restaurant, as: 'FavoritedRestaurants' },
+        { model: User, as: 'Followers' },
+        { model: User, as: 'Followings' }
+      ],
+      nest: true
     })
       .then(user => {
         if (!user) throw new Error("User didn't exist!")
+        user = user.toJSON()
+        user.commentedRestaurants = user.Comments && user.Comments.reduce((acc, c) => {
+          if (!acc.some(r => r.id === c.restaurantId)) {
+            acc.push(c.Restaurant)
+          }
+          return acc
+        }, [])
+        console.log(user.commentedRestaurants)
         return res.render('users/profile', {
-          user: user.toJSON(),
-          comment: user.toJSON().Comments
+          currentUser: user
         })
       })
       .catch(err => next(err))
