@@ -10,7 +10,6 @@ const commentController = require('../controllers/comment-controller')
 
 const { generalErrorHandler } = require('../middleware/error-handler')
 const { authenticated, authenticatedAdmin } = require('../middleware/auth')
-const restaurantController = require('../controllers/restaurant-controller')
 
 // admin
 router.use('/admin', authenticatedAdmin, admin)
@@ -28,7 +27,8 @@ router.get('/users/:id/edit', authenticated, userController.editUser)
 router.get('/users/:id', authenticated, userController.getUser)
 router.put('/users/:id', authenticated, upload.single('image'), userController.putUser)
 // restaurant
-router.get('/restaurants/feeds', authenticated, restaurantController.getFeeds)
+router.get('/restaurants/top', authenticated, restController.getTopRestaurants)
+router.get('/restaurants/feeds', authenticated, restController.getFeeds)
 router.get('/restaurants/:id/dashboard', authenticated, restController.getDashboard)
 router.get('/restaurants/:id', authenticated, restController.getRestaurant)
 router.get('/restaurants', authenticated, restController.getRestaurants)
