@@ -47,6 +47,7 @@ const restaurantController = {
   },
   getRestaurant: (req, res, next) => {
     return Restaurant.findByPk(req.params.id, {
+<<<<<<< HEAD
       include: [
         Category,
         { model: Comment, include: User },
@@ -131,6 +132,31 @@ const restaurantController = {
           .sort((a, b) => b.favoritedCount - a.favoritedCount)
           .slice(0, 10)
         return res.render('top-restaurants', { restaurants: data })
+=======
+      include: Category
+    })
+      .then(restaurant => {
+        if (!restaurant) throw new Error("Restaurant doesn't exist!")
+        return restaurant.increment({ viewCount: 1 })
+      })
+      .then(restaurant => {
+        console.log(restaurant)
+        res.render('restaurant', {
+          restaurant: restaurant.toJSON()
+        })
+      })
+      .catch(err => next(err))
+  },
+  getDashboard: (req, res, next) => {
+    return Restaurant.findByPk(req.params.id, {
+      raw: true,
+      nest: true,
+      include: Category
+    })
+      .then(restaurant => {
+        if (!restaurant) throw new Error("Restaurant doesn't exist!")
+        return res.render('dashboard', { restaurant })
+>>>>>>> R02
       })
       .catch(err => next(err))
   }
