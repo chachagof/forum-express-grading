@@ -131,6 +131,7 @@ const restaurantController = {
           .sort((a, b) => b.favoritedCount - a.favoritedCount)
           .slice(0, 10)
         return res.render('top-restaurants', { restaurants: data })
+<<<<<<< HEAD
 =======
       include: Category
     })
@@ -156,6 +157,8 @@ const restaurantController = {
         if (!restaurant) throw new Error("Restaurant doesn't exist!")
         return res.render('dashboard', { restaurant })
 >>>>>>> R02
+=======
+>>>>>>> R05
       })
       .catch(err => next(err))
   }
