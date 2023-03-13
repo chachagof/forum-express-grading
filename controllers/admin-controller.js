@@ -1,9 +1,4 @@
-<<<<<<< HEAD
 const { Restaurant, User, Category } = require('../models')
-=======
-const { Restaurant } = require('../models')
-const { User } = require('../models')
->>>>>>> R01
 const { imgurFileHandler } = require('../helpers/file-helpers')
 
 const adminController = {

@@ -22,52 +22,28 @@ router.post('/signin', passport.authenticate('local', { failureRedirect: '/signi
 // logout
 router.get('/logout', userController.logout)
 // users
-<<<<<<< HEAD
 router.get('/users/top', authenticated, userController.getTopUsers)
-=======
->>>>>>> R04
 router.get('/users/:id/edit', authenticated, userController.editUser)
 router.get('/users/:id', authenticated, userController.getUser)
 router.put('/users/:id', authenticated, upload.single('image'), userController.putUser)
 // restaurant
-<<<<<<< HEAD
-<<<<<<< HEAD
-router.get('/restaurants/top', authenticated, restController.getTopRestaurants)
 router.get('/restaurants/feeds', authenticated, restController.getFeeds)
-=======
->>>>>>> R02
-=======
 router.get('/restaurants/top', authenticated, restController.getTopRestaurants)
-router.get('/restaurants/feeds', authenticated, restController.getFeeds)
->>>>>>> R05
 router.get('/restaurants/:id/dashboard', authenticated, restController.getDashboard)
 router.get('/restaurants/:id', authenticated, restController.getRestaurant)
 router.get('/restaurants', authenticated, restController.getRestaurants)
 // comment
-router.delete('/comments/:id', commentController.deleteComment)
-router.post('/comments', commentController.postComment)
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> R04
+router.delete('/comments/:id', authenticatedAdmin, commentController.deleteComment)
+router.post('/comments', authenticated, commentController.postComment)
 // favorite
 router.post('/favorite/:restaurantId', authenticated, userController.addFavorite)
 router.delete('/favorite/:restaurantId', authenticated, userController.removeFavorite)
 // like
 router.post('/like/:restaurantId', authenticated, userController.addLike)
 router.delete('/like/:restaurantId', authenticated, userController.removeLike)
-<<<<<<< HEAD
 // followship
 router.post('/following/:userId', authenticated, userController.addFollowing)
 router.delete('/following/:userId', authenticated, userController.removeFollowing)
-=======
-// users
-router.get('/users/:id/edit', authenticated, userController.editUser)
-router.get('/users/:id', authenticated, userController.getUser)
-router.put('/users/:id', authenticated, upload.single('image'), userController.putUser)
->>>>>>> R03
-=======
->>>>>>> R04
 
 router.use('/', (req, res) => res.redirect('/restaurants'))
 router.use('/', generalErrorHandler)
