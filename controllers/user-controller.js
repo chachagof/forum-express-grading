@@ -1,7 +1,11 @@
 const bcrypt = require('bcryptjs')
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const { User, Restaurant, Comment, Favorite, Like, Followship } = require('../models')
+=======
+const { User, Restaurant, Comment, Favorite, Like } = require('../models')
+>>>>>>> R04
 const { imgurFileHandler } = require('../helpers/file-helpers')
 =======
 const { User, Restaurant, Comment } = require('../models')
@@ -201,6 +205,7 @@ const userController = {
       })
       .then(() => res.redirect('back'))
       .catch(err => next(err))
+<<<<<<< HEAD
   },
   getTopUsers: (req, res, next) => {
     return User.findAll({
@@ -255,6 +260,8 @@ const userController = {
       .catch(err => next(err))
 =======
 >>>>>>> R03
+=======
+>>>>>>> R04
   }
 }
 
