@@ -235,7 +235,10 @@ describe('# R01', () => {
         res.redirect.calledWith('/admin/users').should.be.true
 
         // patchUser 執行完畢後，假資料中 id:2 使用者的應該要是 isAdmin：false
+<<<<<<< HEAD
 >>>>>>> R01
+=======
+>>>>>>> R03
         // 將假資料撈出，比對確認有成功修改到
         const user = await this.UserMock.findOne({ where: { id: 2 } })
         user.isAdmin.should.equal(false)
@@ -243,7 +246,11 @@ describe('# R01', () => {
     })
   })
 <<<<<<< HEAD
+<<<<<<< HEAD
 })
 =======
 })
 >>>>>>> R01
+=======
+})
+>>>>>>> R03

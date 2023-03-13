@@ -38,6 +38,7 @@ router.get('/restaurants', authenticated, restController.getRestaurants)
 // comment
 router.delete('/comments/:id', commentController.deleteComment)
 router.post('/comments', commentController.postComment)
+<<<<<<< HEAD
 // favorite
 router.post('/favorite/:restaurantId', authenticated, userController.addFavorite)
 router.delete('/favorite/:restaurantId', authenticated, userController.removeFavorite)
@@ -47,6 +48,12 @@ router.delete('/like/:restaurantId', authenticated, userController.removeLike)
 // followship
 router.post('/following/:userId', authenticated, userController.addFollowing)
 router.delete('/following/:userId', authenticated, userController.removeFollowing)
+=======
+// users
+router.get('/users/:id/edit', authenticated, userController.editUser)
+router.get('/users/:id', authenticated, userController.getUser)
+router.put('/users/:id', authenticated, upload.single('image'), userController.putUser)
+>>>>>>> R03
 
 router.use('/', (req, res) => res.redirect('/restaurants'))
 router.use('/', generalErrorHandler)

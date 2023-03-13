@@ -1,7 +1,13 @@
 const bcrypt = require('bcryptjs')
 
+<<<<<<< HEAD
 const { User, Restaurant, Comment, Favorite, Like, Followship } = require('../models')
 const { imgurFileHandler } = require('../helpers/file-helpers')
+=======
+const { User, Restaurant, Comment } = require('../models')
+const { imgurFileHandler } = require('../helpers/file-helpers')
+const { Promise } = require('sequelize-mock')
+>>>>>>> R03
 
 const userController = {
   signUpPage: (req, res) => {
@@ -41,6 +47,7 @@ const userController = {
     res.redirect('/signin')
   },
   getUser: (req, res, next) => {
+<<<<<<< HEAD
     const { id } = req.params
     return User.findByPk(id, {
       include: [
@@ -63,6 +70,19 @@ const userController = {
         console.log(user.commentedRestaurants)
         return res.render('users/profile', {
           currentUser: user
+=======
+    return User.findByPk(req.params.id, {
+      include: [{
+        model: Comment,
+        include: Restaurant
+      }]
+    })
+      .then(user => {
+        if (!user) throw new Error("User didn't exist!")
+        return res.render('users/profile', {
+          user: user.toJSON(),
+          comment: user.toJSON().Comments
+>>>>>>> R03
         })
       })
       .catch(err => next(err))
@@ -80,11 +100,14 @@ const userController = {
   putUser: (req, res, next) => {
     const { name } = req.body
     const { file } = req
+<<<<<<< HEAD
 
     if (Number(req.params.id) !== Number(req.user.id)) {
       return res.redirect(`/users/${req.params.id}`)
     }
 
+=======
+>>>>>>> R03
     if (!name) throw new Error('Name is required!')
 
     return Promise.all([
@@ -103,6 +126,7 @@ const userController = {
         return res.redirect(`/users/${req.params.id}`)
       })
       .catch(err => next(err))
+<<<<<<< HEAD
   },
   addFavorite: (req, res, next) => {
     const { restaurantId } = req.params
@@ -229,6 +253,8 @@ const userController = {
       })
       .then(() => res.redirect('back'))
       .catch(err => next(err))
+=======
+>>>>>>> R03
   }
 }
 
